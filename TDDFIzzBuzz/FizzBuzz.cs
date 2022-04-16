@@ -10,7 +10,8 @@ namespace TDDFIzzBuzz
     {
         public string PrintFizzOrBuzz(int[] numbers)
         {
-            string result = ParseNumbersToString(numbers) ?? "";
+            
+            string result = (NumbersValidation(numbers)) ? ParseNumbersToString(numbers) : string.Empty;
             return result;
         }
 
@@ -46,5 +47,7 @@ namespace TDDFIzzBuzz
         private bool CheckIfContainsThree(int item) => item.ToString().Contains("3") ? true : false;
         
         private bool CheckIfContainsFive(int item) => item.ToString().Contains("5") ? true : false;
+
+        private bool NumbersValidation(int[] numbers) => (numbers is null || numbers.Length < 0) ? false : true;
     }
 }

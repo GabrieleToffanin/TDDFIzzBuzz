@@ -17,12 +17,21 @@ namespace TDDFIzzBuzz
             _fizzBuzz = new FizzBuzz();
         }
 
+        [TestCase(null, "")]
+        [TestCase(new int[] { }, "")]
+        [Test]
+        public void GetEmptyStringIntArrayNullOrEmpty(int[] numbers, string expectedResult)
+        {
+            var result = _fizzBuzz.PrintFizzOrBuzz(numbers);
+            Assert.That(result, Is.EqualTo(expectedResult));
+        }
+
         [TestCase(new int[] {3}, "Fizz")]
         [TestCase(new int[] {5}, "Buzz")]
         [Test]
-        public void GetFizzIfThreeGetBuzzIfFive(int[] num, string expectedResult)
+        public void GetFizzIfThreeGetBuzzIfFive(int[] numbers, string expectedResult)
         {
-            var result = _fizzBuzz.PrintFizzOrBuzz(num);
+            var result = _fizzBuzz.PrintFizzOrBuzz(numbers);
             Assert.That(result, Is.EqualTo(expectedResult));
         }
 
