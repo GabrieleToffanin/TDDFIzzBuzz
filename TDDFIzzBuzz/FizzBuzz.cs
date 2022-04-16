@@ -10,22 +10,41 @@ namespace TDDFIzzBuzz
     {
         public string PrintFizzOrBuzz(int[] numbers)
         {
-            string result = ParseNumbersToString(numbers);
+            string result = ParseNumbersToString(numbers) ?? "";
             return result;
         }
 
         private string ParseNumbersToString(int[] numbers)
         {
             string result = "";
-            foreach(var number in numbers)
+            
+            foreach(var item in numbers)
             {
-                if (number.Equals(3))
-                    result += "Fizz";
-                if (number.Equals(5))
-                    result += "Buzz";
+                if (!CheckIfLastItem(numbers, item))
+                    result += CheckNumber(item);
+                else result += CheckNumber(item).TrimEnd(',');
             }
 
             return result;
         }
+
+        private string CheckNumber(int item)
+        {
+            
+            if (item % 3 is 0 || CheckIfContainsThree(item))
+                return "Fizz,";
+            else if (item % 5 is 0 || CheckIfContainsFive(item))
+                return "Buzz,";
+            else return item.ToString() + ",";
+        }
+
+        private bool CheckIfLastItem(int[] items, int current)
+        {
+            return current == items[items.Length - 1] ? true : false; 
+        }
+
+        private bool CheckIfContainsThree(int item) => item.ToString().Contains("3") ? true : false;
+        
+        private bool CheckIfContainsFive(int item) => item.ToString().Contains("5") ? true : false;
     }
 }
